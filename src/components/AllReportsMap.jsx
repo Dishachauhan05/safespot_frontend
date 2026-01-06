@@ -38,7 +38,9 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const res = await axios.get("https://safespot-backend.onrender.com/report");
+        const res = await axios.get(
+          "https://safespot-backend-latest.onrender.com/report"
+        );
         setReports(res.data);
       } catch (error) {
         console.error("Failed to fetch reports", error);
@@ -48,7 +50,10 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="container my-4" style={{ backgroundColor: "#f4f6f9" }}>
+    <div
+      className="container my-4"
+      style={{ backgroundColor: "#f4f6f9" }}
+    >
       <h2 className="text-center mb-4 display-6 fw-bold text-success">
         🛡️ SafeSpot Dashboard
       </h2>
@@ -70,7 +75,9 @@ const Dashboard = () => {
             <div className="card-body">
               <h5 className="card-title">
                 {coords
-                  ? `${coords.latitude.toFixed(3)}, ${coords.longitude.toFixed(3)}`
+                  ? `${coords.latitude.toFixed(3)}, ${coords.longitude.toFixed(
+                      3
+                    )}`
                   : locationError || "Fetching..."}
               </h5>
               <p className="card-text">Current geolocation.</p>
@@ -89,7 +96,9 @@ const Dashboard = () => {
               </h5>
               <p className="card-text">
                 {reports.length > 0 && reports[reports.length - 1].createdAt
-                  ? new Date(reports[reports.length - 1].createdAt).toLocaleString()
+                  ? new Date(
+                      reports[reports.length - 1].createdAt
+                    ).toLocaleString()
                   : "No data"}
               </p>
             </div>
@@ -103,7 +112,10 @@ const Dashboard = () => {
             <div className="card-header bg-success text-white fw-semibold">
               🗺️ Live Incident Map
             </div>
-            <div className="card-body p-0" style={{ height: "600px" }}>
+            <div
+              className="card-body p-0"
+              style={{ height: "600px" }}
+            >
               <MapContainer
                 center={
                   coords
@@ -131,7 +143,11 @@ const Dashboard = () => {
                   if (!coordinates || coordinates.length !== 2) return null;
                   const [lng, lat] = coordinates;
                   return (
-                    <Marker key={report._id} position={[lat, lng]} icon={redIcon}>
+                    <Marker
+                      key={report._id}
+                      position={[lat, lng]}
+                      icon={redIcon}
+                    >
                       <Popup>
                         <strong>{report.title}</strong>
                         <br />
@@ -141,7 +157,7 @@ const Dashboard = () => {
                         <br />
                         {report.imageUrl && (
                           <img
-                            src={`https://safespot-backend.onrender.com${report.imageUrl}`}
+                            src={`https://safespot-backend-latest.onrender.com${report.imageUrl}`}
                             alt="Report"
                             style={{ width: "100px", marginTop: "5px" }}
                           />
@@ -192,7 +208,7 @@ const Dashboard = () => {
                       <p className="mb-1">{report.description}</p>
                       {report.imageUrl && (
                         <img
-                          src={`https://safespot-backend.onrender.com${report.imageUrl}`}
+                          src={`https://safespot-backend-latest.onrender.com${report.imageUrl}`}
                           alt="report"
                           className="img-fluid rounded mt-2"
                           style={{
